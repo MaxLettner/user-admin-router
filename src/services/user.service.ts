@@ -23,6 +23,16 @@ export const getUsers = () => {
     return users
 }
 
+export const getUserById = (id: String) => {
+    let u : UserIF | null = null
+    users.map((user) => {
+        if(user.id === id) {
+            u = user
+        }
+    })
+    return u
+}
+
 export const createUser = (user: UserIF) => {
     user.id = uid()  
     users = [user, ...users]
