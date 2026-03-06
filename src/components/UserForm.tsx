@@ -7,7 +7,8 @@ const UserForm = () => {
     const [name, setName] = useState('')
     const [role, setRole] = useState('')
 
-    //let navigate = useNavigate()
+    let navigate = useNavigate()
+    const id = useParams()
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()

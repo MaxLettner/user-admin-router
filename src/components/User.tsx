@@ -1,10 +1,14 @@
 import type UserIF from "../services/user.service"
+import { useNavigate } from "react-router"
 
 interface Props {
     user: UserIF
+    onDelete: (u: UserIF) => void
 }
 
-const User = ({user}: Props) => {
+const User = ({user, onDelete}: Props) => {
+
+    let navigate = useNavigate()
     
     return(
         <tr>
@@ -20,8 +24,8 @@ const User = ({user}: Props) => {
                 </select>
             </td>
             <td>
-                <button className="btn btn-outline-primary me-2"><i className="bi bi-pencil"></i></button>
-                <button className="btn btn-outline-danger"><i className="bi bi-trash"></i></button>
+                <button className="btn btn-outline-primary me-2"><i className="bi bi-pencil" onClick={() => {navigate(`/form/${user.id}`)}}></i></button>
+                <button className="btn btn-outline-danger"><i className="bi bi-trash" onClick={() => {onDelete(user)}}></i></button>
             </td>
         </tr>
     )

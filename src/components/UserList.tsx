@@ -1,9 +1,18 @@
 import User from './User.tsx'
 import * as userService from '../services/user.service.ts'
 import type UserIF from '../services/user.service.ts'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 const UserList = () => {
-    const users = userService.getUsers()
+    const [users, setUsers] = useState(userService.getUsers())
+
+    let navigate = useNavigate()
+
+    const handleDelete = (user: UserIF) => {
+        userService.deleteUser(user)
+        setUsers(userService.getUsers())
+    }
 
     return (
         <>
@@ -19,10 +28,11 @@ const UserList = () => {
 
             <tbody className="users">
                 {users.map((user, index) => (
-                    <User key={index} user={user}/>
+                    <User key={index} user={user} onDelete={handleDelete}/>
                 ))}
             </tbody>
-        </table>     
+        </table>   
+        <button className='btn btn-primary' onClick={() => {navigate('/form')}}>New User</button>  
         </>
     )
 }
